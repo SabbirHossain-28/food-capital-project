@@ -3,7 +3,7 @@ const ItemCard = ({data}) => {
     return (
         <div>
             <div className="flex gap-4 items-center shadow-lg p-4 rounded-lg">
-                <div className="w-28 h-24 bg-[#D9D9D9] rounded-tr-full rounded-br-full rounded-bl-full"></div>
+                <div className="min-w-24 h-24 bg-[#D9D9D9] rounded-tr-full rounded-br-full rounded-bl-full"></div>
                 <div>
                     <div className="flex justify-between">
                         <p className="text-[#151515] text-xl">{data.name}----------</p>
