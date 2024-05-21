@@ -7,6 +7,7 @@ import categoryImg2 from "../../assets/images/home/slide2.jpg";
 import categoryImg3 from "../../assets/images/home/slide3.jpg";
 import categoryImg4 from "../../assets/images/home/slide4.jpg";
 import categoryImg5 from "../../assets/images/home/slide5.jpg";
+import SectionTitle from "../SectionTitle/SectionTitle";
 
 const categoryImages = [
   {
@@ -34,6 +35,9 @@ const categoryImages = [
 const Category = () => {
   return (
     <div className="my-16">
+        <div className="flex justify-center text-center">
+        <SectionTitle subHeading={"---From 11:00am to 10:00pm---"} heading={"ORDER ONLINE"}></SectionTitle>
+        </div>
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
