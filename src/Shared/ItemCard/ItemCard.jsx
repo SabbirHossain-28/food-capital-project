@@ -1,6 +1,5 @@
 
 const ItemCard = ({data}) => {
-    console.log(data);
     return (
         <div>
             <div className="flex gap-4 items-center shadow-lg p-4 rounded-lg">

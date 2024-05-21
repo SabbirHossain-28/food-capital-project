@@ -13,7 +13,6 @@ const [menuData,setMenuData]=useState([]);
         })
 
     },[])
-    console.log(menuData);
     return (
         <div className="my-16">
             <div className="flex justify-center text-center">

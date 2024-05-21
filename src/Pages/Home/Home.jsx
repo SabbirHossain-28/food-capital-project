@@ -5,21 +5,25 @@ import ContactNum from "../../Components/ContactNum/ContactNum";
 import Featured from "../../Components/Featured/Featured";
 import PopularMenu from "../../Components/PopularFoodMenu/PopularMenu";
 import RecommendItems from "../../Components/RecommendItems/RecommendItems";
+import Testimonials from "../../Components/Testimonials/Testimonials";
 
 const Home = () => {
-    return (
-        <div>
-            <Banner></Banner>
-            <div className="max-w-screen-xl mx-auto">
-            <Category></Category>
-            <AboutBanner></AboutBanner>
-            <PopularMenu></PopularMenu>
-            <ContactNum></ContactNum>
-            <RecommendItems></RecommendItems>
-            </div>
-            <Featured></Featured>
-        </div>
-    );
+  return (
+    <div>
+      <Banner></Banner>
+      <div className="max-w-screen-xl mx-auto">
+        <Category></Category>
+        <AboutBanner></AboutBanner>
+        <PopularMenu></PopularMenu>
+        <ContactNum></ContactNum>
+        <RecommendItems></RecommendItems>
+      </div>
+      <Featured></Featured>
+      <div className="max-w-screen-xl mx-auto">
+        <Testimonials></Testimonials>
+      </div>
+    </div>
+  );
 };
 
 export default Home;

@@ -5,32 +5,32 @@ import { RxAvatar } from "react-icons/rx";
 const Navbar = () => {
   const navMenu = (
     <>
-      <li>
+      <li className="text-white">
         <a>Home</a>
       </li>
-      <li>
+      <li className="text-white">
       <a>Contact Us</a>
       </li>
-      <li>
+      <li className="text-white">
         <a>Dashboard</a>
       </li>
-      <li>
+      <li className="text-white">
         <a>Our Menu</a>
       </li>
-      <li>
+      <li className="text-white">
         <a>Our Shop</a>
       </li>
-      <li>
+      <li className="text-white">
         <a>Sign out</a>
       </li>
-      <li>
+      <li className="text-white">
         <a className="text-2xl"><TiShoppingCart></TiShoppingCart></a>
       </li>
     </>
   );
   return (
     <>
-      <div className="navbar fixed z-10 bg-opacity-30 bg-gray-500">
+      <div className="navbar fixed z-10 bg-opacity-40 bg-gray-600">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -56,7 +56,7 @@ const Navbar = () => {
               {navMenu}
             </ul>
           </div>
-          <a className="text-xl font-bold">
+          <a className="text-xl font-bold text-white">
             FoodCapital <br />
             <span className="text-lg">Restaurant</span>
           </a>
