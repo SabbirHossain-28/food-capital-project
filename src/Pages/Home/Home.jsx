@@ -2,6 +2,7 @@ import AboutBanner from "../../Components/AboutBanner/AboutBanner";
 import Banner from "../../Components/Banner/Banner";
 import Category from "../../Components/Category/Category";
 import ContactNum from "../../Components/ContactNum/ContactNum";
+import Featured from "../../Components/Featured/Featured";
 import PopularMenu from "../../Components/PopularFoodMenu/PopularMenu";
 import RecommendItems from "../../Components/RecommendItems/RecommendItems";
 
@@ -16,6 +17,7 @@ const Home = () => {
             <ContactNum></ContactNum>
             <RecommendItems></RecommendItems>
             </div>
+            <Featured></Featured>
         </div>
     );
 };
