@@ -36,7 +36,7 @@ const Category = () => {
   return (
     <div className="my-16">
         <div className="flex justify-center text-center">
-        <SectionTitle subHeading={"---From 11:00am to 10:00pm---"} heading={"ORDER ONLINE"}></SectionTitle>
+        <SectionTitle subHeading={"From 11:00am to 10:00pm"} heading={"ORDER ONLINE"}></SectionTitle>
         </div>
       <Swiper
         slidesPerView={4}
