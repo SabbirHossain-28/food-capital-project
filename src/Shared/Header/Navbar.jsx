@@ -1,12 +1,13 @@
 import { TiShoppingCart } from "react-icons/ti";
 import { RxAvatar } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
   const navMenu = (
     <>
       <li className="text-white">
-        <a>Home</a>
+        <Link to="/">Home</Link>
       </li>
       <li className="text-white">
       <a>Contact Us</a>
@@ -15,7 +16,7 @@ const Navbar = () => {
         <a>Dashboard</a>
       </li>
       <li className="text-white">
-        <a>Our Menu</a>
+        <Link to="/menu">Our Menu</Link>
       </li>
       <li className="text-white">
         <a>Our Shop</a>
