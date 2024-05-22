@@ -6,12 +6,14 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenuData from "../../Hooks/useMenuData";
 import FoodCardDataTab from "./FoodCardDataTab";
+import { useParams } from "react-router-dom";
 
 const OurShop = () => {
-  const [tabIndex, setTabIndex] = useState(0);
-  //   console.log(tabIndex);
+    const categories=["salad","pizza","soup","dessert","drinks"];
+    const {category}=useParams();
+    const initialIndex=categories.indexOf(category)
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menuData] = useMenuData();
-  //   console.log(menuData);
 
   const shopDataForDessert = menuData.filter(
     (item) => item.category === "dessert"
@@ -35,11 +37,11 @@ const OurShop = () => {
       <div className="max-w-7xl mx-auto mb-16">
         <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList>
-            <Tab>Salads</Tab>
-            <Tab>Pizzas</Tab>
-            <Tab>Soups</Tab>
-            <Tab>Desserts</Tab>
-            <Tab>DFrinks</Tab>
+            <Tab>Salad</Tab>
+            <Tab>Pizza</Tab>
+            <Tab>Soup</Tab>
+            <Tab>Dessert</Tab>
+            <Tab>Drinks</Tab>
           </TabList>
 
           <TabPanel>

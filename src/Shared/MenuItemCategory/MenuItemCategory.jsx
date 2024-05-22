@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import ItemCard from "../ItemCard/ItemCard";
 
-const MenuItemCategory = ({ item,btnText }) => {
+const MenuItemCategory = ({ item,btnText,category }) => {
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
@@ -9,9 +10,9 @@ const MenuItemCategory = ({ item,btnText }) => {
         ))}
       </div>
       <div className="text-center">
-        <button className="px-8 py-2 border-b-2 border-[#151515] rounded-lg text-xl font-medium">
+        <Link to={`/shop/${category}`}><button className="px-8 py-2 border-b-2 border-[#BB8506] text-[#BB8506] rounded-lg text-xl font-medium hover:bg-[#111827]">
           {btnText}
-        </button>
+        </button></Link>
       </div>
     </div>
   );

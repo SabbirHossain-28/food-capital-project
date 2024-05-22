@@ -53,6 +53,7 @@ const Menu = () => {
           <MenuItemCategory
             item={menuDataForDessert}
             btnText={"ORDER YOUR FAVOURITE FOOD"}
+            category={"dessert"}
           ></MenuItemCategory>
         </div>
       <Cover
@@ -66,6 +67,7 @@ const Menu = () => {
           <MenuItemCategory
             item={menuDataForPizza}
             btnText={"ORDER YOUR FAVOURITE FOOD"}
+            category={"pizza"}
           ></MenuItemCategory>
         </div>
       <Cover
@@ -79,6 +81,7 @@ const Menu = () => {
         <MenuItemCategory
           item={menuDataForSalad}
           btnText={"ORDER YOUR FAVOURITE FOOD"}
+          category={"salad"}
         ></MenuItemCategory>
       </div>
       <Cover
@@ -92,6 +95,7 @@ const Menu = () => {
         <MenuItemCategory
           item={menuDataForSoup}
           btnText={"ORDER YOUR FAVOURITE FOOD"}
+          category={"soup"}
         ></MenuItemCategory>
       </div>
     </div>
