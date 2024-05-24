@@ -12,10 +12,7 @@ import TitleHelmet from "../../Components/TitleHelmet/TitleHelmet";
 const Home = () => {
   return (
     <div>
-        {/* <Helmet>
-            <title>FoodCapital | Home</title>
-        </Helmet> */}
-        <TitleHelmet title={"Home"}></TitleHelmet>
+      <TitleHelmet title={"Home"}></TitleHelmet>
       <Banner></Banner>
       <div className="max-w-screen-xl mx-auto">
         <Category></Category>
