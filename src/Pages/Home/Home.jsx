@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+// import { Helmet } from "react-helmet-async";
 import AboutBanner from "../../Components/AboutBanner/AboutBanner";
 import Banner from "../../Components/Banner/Banner";
 import Category from "../../Components/Category/Category";
@@ -7,13 +7,15 @@ import Featured from "../../Components/Featured/Featured";
 import PopularMenu from "../../Components/PopularFoodMenu/PopularMenu";
 import RecommendItems from "../../Components/RecommendItems/RecommendItems";
 import Testimonials from "../../Components/Testimonials/Testimonials";
+import TitleHelmet from "../../Components/TitleHelmet/TitleHelmet";
 
 const Home = () => {
   return (
     <div>
-        <Helmet>
+        {/* <Helmet>
             <title>FoodCapital | Home</title>
-        </Helmet>
+        </Helmet> */}
+        <TitleHelmet title={"Home"}></TitleHelmet>
       <Banner></Banner>
       <div className="max-w-screen-xl mx-auto">
         <Category></Category>
