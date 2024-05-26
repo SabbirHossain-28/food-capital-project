@@ -1,5 +1,4 @@
 const FoodCards = ({ item }) => {
-  console.log(item);
   const { name, recipe, price, category } = item;
   return (
     <div>

@@ -1,9 +1,12 @@
 import { TiShoppingCart } from "react-icons/ti";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 
 const Navbar = () => {
+  // const {user}=useAuth();
+  // console.log(user);
   const navMenu = (
     <>
       <li className="text-white">
@@ -22,7 +25,10 @@ const Navbar = () => {
         <Link to="/shop/salad">Our Shop</Link>
       </li>
       <li className="text-white">
-        <a>Sign out</a>
+      <button>Logout</button>
+      </li>
+      <li className="text-white">
+      <Link to="/login">Login</Link>
       </li>
       <li className="text-white">
         <a className="text-2xl"><TiShoppingCart></TiShoppingCart></a>
