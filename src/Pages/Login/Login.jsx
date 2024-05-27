@@ -6,12 +6,14 @@ import loginFormImg from "../../assets/images/others/authentication2.png";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { signInUser } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [formData, setFormData] = useState(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -35,6 +37,7 @@ const Login = () => {
         if (userCredential) {
           setIsModalOpen(false);
           alert("Login successful");
+          navigate("/");
         }
       } catch (error) {
         alert("Login failed: " + error.message);
@@ -63,7 +66,10 @@ const Login = () => {
           <h2 className="text-5xl font-bold text-center">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-2">
-              <label htmlFor="email" className="block text-xl font-semibold text-[#151515] mb-2">
+              <label
+                htmlFor="email"
+                className="block text-xl font-semibold text-[#151515] mb-2"
+              >
                 Email
               </label>
               <input
@@ -73,10 +79,17 @@ const Login = () => {
                 {...register("email", { required: "Email is required" })}
                 className="w-full p-2"
               />
-              {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+              {errors.email && (
+                <span className="text-red-500 text-sm">
+                  {errors.email.message}
+                </span>
+              )}
             </div>
             <div>
-              <label htmlFor="password" className="block text-xl font-semibold text-[#151515] mb-2">
+              <label
+                htmlFor="password"
+                className="block text-xl font-semibold text-[#151515] mb-2"
+              >
                 Password
               </label>
               <input
@@ -102,24 +115,43 @@ const Login = () => {
                   },
                 })}
               />
-              {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+              {errors.password && (
+                <span className="text-red-500 text-sm">
+                  {errors.password.message}
+                </span>
+              )}
             </div>
-            <input type="submit" value="Login" className="w-full border p-2 bg-[#D1A054B3] text-white mt-4" />
+            <input
+              type="submit"
+              value="Login"
+              className="w-full border p-2 bg-[#D1A054B3] text-white mt-4"
+            />
           </form>
+          <div className="my-2">
+            <p className="text-lg text-[#926219b3]">
+              New here?<Link className="font-semibold" to="/registration">Create a New Account</Link>
+            </p>
+          </div>
 
           {isModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-              <div style={{backgroundImage:`url(${loginBgImg})`}} className="modal-box rounded p-8">
-                <form
-                  onSubmit={handleValidateCaptcha}
-                >
+              <div
+                style={{ backgroundImage: `url(${loginBgImg})` }}
+                className="modal-box rounded p-8"
+              >
+                <form onSubmit={handleValidateCaptcha}>
                   <ReCAPTCHA
                     className="flex justify-center mb-4"
                     sitekey="6LcWXOgpAAAAAMdGtHjbFpgzz5VH392Jwyh0nEhd"
                     onChange={verifyChecked}
                   />
                   <div className="flex justify-center">
-                  <button type="submit" className="border py-2 px-3 rounded-lg bg-[#cd9035b3] text-white ">Validate Captcha</button>
+                    <button
+                      type="submit"
+                      className="border py-2 px-3 rounded-lg bg-[#cd9035b3] text-white "
+                    >
+                      Validate Captcha
+                    </button>
                   </div>
                 </form>
               </div>

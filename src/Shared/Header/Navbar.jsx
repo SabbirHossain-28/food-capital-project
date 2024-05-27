@@ -1,12 +1,19 @@
 import { TiShoppingCart } from "react-icons/ti";
 import { RxAvatar } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 
 const Navbar = () => {
-  // const {user}=useAuth();
-  // console.log(user);
+  const {user,logOut}=useAuth();
+  const navigate=useNavigate();
+  console.log(user);
+  const handleLogout=()=>{
+    logOut()
+    .then(()=>{
+      navigate("/")
+    })
+  }
   const navMenu = (
     <>
       <li className="text-white">
@@ -24,12 +31,12 @@ const Navbar = () => {
       <li className="text-white">
         <Link to="/shop/salad">Our Shop</Link>
       </li>
-      <li className="text-white">
-      <button>Logout</button>
-      </li>
+      {user?<li className="text-white">
+      <button onClick={handleLogout}>Logout</button>
+      </li>:
       <li className="text-white">
       <Link to="/login">Login</Link>
-      </li>
+      </li>}
       <li className="text-white">
         <a className="text-2xl"><TiShoppingCart></TiShoppingCart></a>
       </li>
