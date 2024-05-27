@@ -5,6 +5,8 @@ import Menu from "../Pages/Menu/Menu";
 import OurShop from "../Pages/OurShop/OurShop";
 import Login from "../Pages/Login/Login";
 import Registration from "../Pages/Registration/Registration";
+import PrivetRoute from "./PrivetRoute";
+import PrivatePage from "../Pages/PrivatePage/PrivatePage";
 
 export  const router=createBrowserRouter([
     {
@@ -30,6 +32,12 @@ export  const router=createBrowserRouter([
             {
                 path:"/registration",
                 element:<Registration></Registration>
+            },
+            {
+                path:"/private",
+                element:<PrivetRoute>
+                    <PrivatePage></PrivatePage>
+                </PrivetRoute>
             },
         ]
     }

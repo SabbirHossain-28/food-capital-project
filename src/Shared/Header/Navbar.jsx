@@ -31,6 +31,9 @@ const Navbar = () => {
       <li className="text-white">
         <Link to="/shop/salad">Our Shop</Link>
       </li>
+      <li className="text-white">
+        <Link to="/private">PrivatePage</Link>
+      </li>
       {user?<li className="text-white">
       <button onClick={handleLogout}>Logout</button>
       </li>:
