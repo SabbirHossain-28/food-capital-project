@@ -1,11 +1,45 @@
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+
 const FoodCards = ({ item }) => {
-  const { name, recipe, price, category } = item;
+  const { _id, name, recipe, price, category, image } = item;
+  const { user } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const handleAddToCart = () => {
+    if (user && user.email) {
+      const cartItem = {
+        foodItemId: _id,
+        userEmail: user.email,
+        name,
+        price,
+        category,
+        image,
+      };
+    } else {
+      Swal.fire({
+        title: "You Are Not Loggedin",
+        text: "Please login first and then add your product in cart",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
   return (
     <div>
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure>
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            src={image}
             alt="Shoes"
           />
         </figure>
@@ -16,10 +50,13 @@ const FoodCards = ({ item }) => {
           <h2 className="text-xl font-semibold">{name}</h2>
           <p className="capitalize text-lg font-medium">{category}</p>
           <div className="h-20">
-          <p>{recipe}</p>
+            <p>{recipe}</p>
           </div>
           <div className="card-actions justify-center">
-            <button className="px-14 py-2 bg-[#E8E8E8] text-[#BB8506] border-b-4 border-[#BB8506] rounded-lg hover:bg-[#111827]">
+            <button
+              onClick={handleAddToCart}
+              className="px-14 py-2 bg-[#E8E8E8] text-[#BB8506] border-b-4 border-[#BB8506] rounded-lg hover:bg-[#111827]"
+            >
               ADD TO CART
             </button>
           </div>
