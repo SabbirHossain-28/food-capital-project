@@ -1,12 +1,15 @@
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+// import axios from "axios";
+import useAxios from "../../Hooks/useAxios";
 
 const FoodCards = ({ item }) => {
   const { _id, name, recipe, price, category, image } = item;
   const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure=useAxios();
   const handleAddToCart = () => {
     if (user && user.email) {
       const cartItem = {
@@ -17,6 +20,19 @@ const FoodCards = ({ item }) => {
         category,
         image,
       };
+      axiosSecure.post("/cart",cartItem)
+      .then(res=>{
+        console.log(res.data);
+        if(res.data.insertedId){
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
     } else {
       Swal.fire({
         title: "You Are Not Loggedin",
