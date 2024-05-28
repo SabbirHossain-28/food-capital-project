@@ -6,7 +6,7 @@ import loginFormImg from "../../assets/images/others/authentication2.png";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import ReCAPTCHA from "react-google-recaptcha";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { signInUser } = useAuth();
@@ -14,6 +14,11 @@ const Login = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [formData, setFormData] = useState(null);
   const navigate = useNavigate();
+  const location=useLocation();
+
+  const from=location.state?.from?.pathname || "/";
+
+
 
   const {
     register,
@@ -37,7 +42,7 @@ const Login = () => {
         if (userCredential) {
           setIsModalOpen(false);
           alert("Login successful");
-          navigate("/");
+          navigate(from,{replace:true});
         }
       } catch (error) {
         alert("Login failed: " + error.message);

@@ -3,24 +3,22 @@ import { RxAvatar } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
-
 const Navbar = () => {
-  const {user,logOut}=useAuth();
-  const navigate=useNavigate();
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
   console.log(user);
-  const handleLogout=()=>{
-    logOut()
-    .then(()=>{
-      navigate("/")
-    })
-  }
+  const handleLogout = () => {
+    logOut().then(() => {
+      navigate("/");
+    });
+  };
   const navMenu = (
     <>
       <li className="text-white">
         <Link to="/">Home</Link>
       </li>
       <li className="text-white">
-      <a>Contact Us</a>
+        <a>Contact Us</a>
       </li>
       <li className="text-white">
         <a>Dashboard</a>
@@ -34,14 +32,22 @@ const Navbar = () => {
       <li className="text-white">
         <Link to="/private">PrivatePage</Link>
       </li>
-      {user?<li className="text-white">
-      <button onClick={handleLogout}>Logout</button>
-      </li>:
+      {user ? (
+        <li className="text-white">
+          <button onClick={handleLogout}>Logout</button>
+        </li>
+      ) : (
+        <li className="text-white">
+          <Link to="/login">Login</Link>
+        </li>
+      )}
       <li className="text-white">
-      <Link to="/login">Login</Link>
-      </li>}
-      <li className="text-white">
-        <a className="text-2xl"><TiShoppingCart></TiShoppingCart></a>
+        <Link to="/">
+          <button className="btn btn-sm">
+            <TiShoppingCart></TiShoppingCart>
+            <div className="badge badge-secondary">+0</div>
+          </button>
+        </Link>
       </li>
     </>
   );
@@ -78,7 +84,7 @@ const Navbar = () => {
             <span className="text-lg">Restaurant</span>
           </a>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end w-4/5">
           <div className=" hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{navMenu}</ul>
           </div>
