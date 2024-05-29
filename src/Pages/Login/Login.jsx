@@ -7,18 +7,20 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa6";
+import Swal from "sweetalert2";
+import useAxiosCommon from "../../Hooks/useAxiosCommon";
 
 const Login = () => {
-  const { signInUser } = useAuth();
+  const { signInUser, googleLogin } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [formData, setFormData] = useState(null);
   const navigate = useNavigate();
-  const location=useLocation();
+  const location = useLocation();
+  const axiosCommon = useAxiosCommon();
 
-  const from=location.state?.from?.pathname || "/";
-
-
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -42,7 +44,7 @@ const Login = () => {
         if (userCredential) {
           setIsModalOpen(false);
           alert("Login successful");
-          navigate(from,{replace:true});
+          navigate(from, { replace: true });
         }
       } catch (error) {
         alert("Login failed: " + error.message);
@@ -50,6 +52,31 @@ const Login = () => {
     } else {
       alert("Please verify the captcha");
     }
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((userCredential) => {
+        if (userCredential) {
+          const userInfo = {
+            name: userCredential.user?.displayName,
+            email: userCredential.user?.email,
+          };
+          axiosCommon.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                title: "Google Login Successfull",
+                text: "You successfully login with your google account",
+                icon: "success",
+              });
+            }
+          });
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((error) => {
+        console.error("There is something error happen", error);
+      });
   };
 
   const verifyChecked = (response) => {
@@ -133,8 +160,19 @@ const Login = () => {
             />
           </form>
           <div className="my-2">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn btn-sm bg-[#D1A054]"
+            >
+              <FaGoogle></FaGoogle> Google Login
+            </button>
+          </div>
+          <div className="my-2">
             <p className="text-lg text-[#926219b3]">
-              New here?<Link className="font-semibold" to="/registration">Create a New Account</Link>
+              New here?
+              <Link className="font-semibold" to="/registration">
+                Create a New Account
+              </Link>
             </p>
           </div>
 
