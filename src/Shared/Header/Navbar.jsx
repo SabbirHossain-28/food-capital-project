@@ -23,7 +23,7 @@ const Navbar = () => {
         <a>Contact Us</a>
       </li>
       <li className="text-white">
-        <a>Dashboard</a>
+       <Link to="/dashboard">DashBorad</Link>
       </li>
       <li className="text-white">
         <Link to="/menu">Our Menu</Link>
@@ -44,7 +44,7 @@ const Navbar = () => {
         </li>
       )}
       <li className="text-white">
-        <Link to="/">
+        <Link to="/dashboard/cart">
           <button className="btn btn-sm">
             <TiShoppingCart></TiShoppingCart>
             <div className="badge badge-secondary">{cart.length}</div>
