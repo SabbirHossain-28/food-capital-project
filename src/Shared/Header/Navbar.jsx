@@ -2,9 +2,11 @@ import { TiShoppingCart } from "react-icons/ti";
 import { RxAvatar } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useCart from "../../Hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [cart]=useCart();
   const navigate = useNavigate();
   console.log(user);
   const handleLogout = () => {
@@ -45,7 +47,7 @@ const Navbar = () => {
         <Link to="/">
           <button className="btn btn-sm">
             <TiShoppingCart></TiShoppingCart>
-            <div className="badge badge-secondary">+0</div>
+            <div className="badge badge-secondary">{cart.length}</div>
           </button>
         </Link>
       </li>
