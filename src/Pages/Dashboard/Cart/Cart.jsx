@@ -1,6 +1,16 @@
+import { FaDeleteLeft } from "react-icons/fa6";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+import useCart from "../../../Hooks/useCart";
+import { MdDelete } from "react-icons/md";
 
 const Cart = () => {
+  const [cart] = useCart();
+  console.log(cart);
+  const totalPrice = cart.reduce(
+    (accumulator, item) => accumulator + item.price,
+    0
+  );
+  console.log(totalPrice);
   return (
     <div className="p-16">
       <div className="flex justify-center text-center">
@@ -9,13 +19,17 @@ const Cart = () => {
           subHeading={"My Cart"}
         ></SectionTitle>
       </div>
-      <div>
+      <div className="my-8">
         <div className="flex justify-between">
           <div>
-            <h2 className="text-3xl font-semibold uppercase">Total Order:0</h2>
+            <h2 className="text-3xl font-semibold uppercase">
+              Total Order:{cart.length}
+            </h2>
           </div>
           <div>
-            <h2 className="text-3xl font-semibold uppercase">Total Price:$0</h2>
+            <h2 className="text-3xl font-semibold uppercase">
+              Total Price:${totalPrice}
+            </h2>
           </div>
           <div>
             <button className="btn bg-[#D1A054] text-white">PAY</button>
@@ -23,12 +37,11 @@ const Cart = () => {
         </div>
       </div>
       <div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto rounded-t-xl">
           <table className="table">
-            {/* head */}
             <thead>
               <tr className="bg-[#D1A054] text-white">
-                <th></th>
+                <th>#</th>
                 <th>ITEM IMAGE</th>
                 <th>ITEM NAME</th>
                 <th>PRICE</th>
@@ -36,39 +49,29 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
-              <tr>
-                <th>
-                  <p>1</p>
-                </th>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
-                          alt="Avatar Tailwind CSS Component"
-                        />
+              {cart.map((itemData, idx) => (
+                <tr key={idx}>
+                  <th>
+                    <p>{idx + 1}</p>
+                  </th>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img src={itemData.image} alt="Food Item Image" />
+                        </div>
                       </div>
                     </div>
-                    <div>
-                      <div className="font-bold">Hart Hagerty</div>
-                      <div className="text-sm opacity-50">United States</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  Zemlak, Daniel and Leannon
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    Desktop Support Technician
-                  </span>
-                </td>
-                <td>Purple</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
-                </th>
-              </tr>
+                  </td>
+                  <td>{itemData.name}</td>
+                  <td>&{itemData.price}</td>
+                  <th>
+                    <button className="btn bg-red-600 btn-xs">
+                      <MdDelete className="text-xl text-white"></MdDelete>
+                    </button>
+                  </th>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
