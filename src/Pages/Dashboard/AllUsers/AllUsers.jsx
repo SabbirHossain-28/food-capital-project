@@ -3,10 +3,11 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAxios from "../../../Hooks/useAxios";
 import { MdDelete } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxios();
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
@@ -14,9 +15,37 @@ const AllUsers = () => {
     },
   });
 
-  const handleUserDelete=id=>{
-    console.log(id);
-  }
+  const handleUserDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete(`/users/${id}`);
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "User has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: "There was an error deleting your user.",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div className="p-16">
