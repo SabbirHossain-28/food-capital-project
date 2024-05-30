@@ -3,6 +3,7 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAxios from "../../../Hooks/useAxios";
 import { MdDelete } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
+import { GrUserAdmin } from "react-icons/gr";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
@@ -14,6 +15,39 @@ const AllUsers = () => {
       return res.data;
     },
   });
+
+  const handleMakeAdminRole = (id) => {
+    // console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to make this user an Admin",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, I want!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.patch(`/users/admin/${id}`);
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Admin Create Successfully",
+              text: "This user is now an Admin of this Website",
+              icon: "success",
+            });
+            refetch();
+          }
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: "There was an error deleting your user.",
+            icon: "error",
+          });
+        }
+      }
+    });
+  };
 
   const handleUserDelete = (id) => {
     Swal.fire({
@@ -78,9 +112,18 @@ const AllUsers = () => {
                   <td>{userData.name}</td>
                   <td>{userData.email}</td>
                   <td>
-                    <button className="bg-[#D1A054] btn btn-xs">
-                      <FaUsers className="text-xl text-white"></FaUsers>
-                    </button>
+                    {userData.role === "admin" ? (
+                      <p className="flex items-center font-semibold">
+                      <GrUserAdmin></GrUserAdmin>Admin
+                    </p>
+                    ) : (
+                      <button
+                        onClick={() => handleMakeAdminRole(userData._id)}
+                        className="bg-[#D1A054] btn btn-xs"
+                      >
+                        <FaUsers className="text-xl text-white"></FaUsers>
+                      </button>
+                    )}
                   </td>
                   <td>
                     <button
