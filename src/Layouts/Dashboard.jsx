@@ -7,8 +7,8 @@ import {
 } from "react-icons/ti";
 import { MdBookOnline, MdOutlineRateReview } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
-import { FaHome, FaUtensils } from "react-icons/fa";
-import { FaBook, FaList, FaUser } from "react-icons/fa6";
+import { FaHome, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaBook, FaList} from "react-icons/fa6";
 
 const Dashboard = () => {
   const isAdmin = true;
@@ -44,7 +44,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink className="text-lg font-medium" to="/dashboard/Users">
-                  <FaUser className="text-xl"></FaUser>All Users
+                  <FaUsers className="text-xl"></FaUsers>All Users
                 </NavLink>
               </li>
               </>
