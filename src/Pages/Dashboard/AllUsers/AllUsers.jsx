@@ -114,8 +114,8 @@ const AllUsers = () => {
                   <td>
                     {userData.role === "admin" ? (
                       <p className="flex items-center font-semibold">
-                      <GrUserAdmin></GrUserAdmin>Admin
-                    </p>
+                        <GrUserAdmin></GrUserAdmin>Admin
+                      </p>
                     ) : (
                       <button
                         onClick={() => handleMakeAdminRole(userData._id)}
