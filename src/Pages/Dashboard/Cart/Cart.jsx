@@ -98,14 +98,14 @@ const Cart = () => {
                   </td>
                   <td>{itemData.name}</td>
                   <td>${itemData.price}</td>
-                  <th>
+                  <td>
                     <button
                       onClick={() => handleCartItemDelete(itemData._id)}
                       className="btn bg-red-600 btn-xs"
                     >
                       <MdDelete className="text-xl text-white"></MdDelete>
                     </button>
-                  </th>
+                  </td>
                 </tr>
               ))}
             </tbody>
