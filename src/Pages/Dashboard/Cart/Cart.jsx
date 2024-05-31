@@ -6,7 +6,7 @@ import useAxios from "../../../Hooks/useAxios";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
-  const axisoSecure = useAxios();
+  const axiosSecure = useAxios();
   const totalPrice = cart.reduce(
     (accumulator, item) => accumulator + item.price,
     0
@@ -24,7 +24,7 @@ const Cart = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await axisoSecure.delete(`/carts/${id}`);
+          const res = await axiosSecure.delete(`/carts/${id}`);
           if (res.status === 200) {
             Swal.fire({
               title: "Deleted!",
