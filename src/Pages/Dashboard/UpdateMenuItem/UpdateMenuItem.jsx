@@ -1,40 +1,50 @@
+import { useParams } from "react-router-dom";
+import useMenuData from "../../../Hooks/useMenuData";
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
-import useAxiosCommon from "../../../Hooks/useAxiosCommon";
 import useAxios from "../../../Hooks/useAxios";
+import useAxiosCommon from "../../../Hooks/useAxiosCommon";
+import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-const AddItems = () => {
+const UpdateMenuItem = () => {
   const axiosCommon = useAxiosCommon();
   const axiosSecure = useAxios();
+  //   const {loadedData}=useLoaderData();
+  //   console.log(loadedData);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+  const { id } = useParams();
+  const [menuData] = useMenuData();
+  const filteredItemData = menuData.find((data) => data._id === id);
   const onSubmit = async (data) => {
     const imageFile = { image: data.file[0] };
     const res = await axiosCommon.post(image_hosting_api, imageFile, {
       headers: {
-        "content-type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
       },
     });
     if (res.data.success) {
-      const menuItem = {
+      const newMenuItem = {
         name: data.recipe,
         recipe: data.details,
         image: res.data.data.display_url,
         category: data.category,
         price: parseFloat(data.price),
       };
-      const postResponse = await axiosSecure.post("/menu", menuItem);
-      console.log(postResponse.data);
-      if (postResponse.data.insertedId) {
+      const updateMenuItemResponse = await axiosSecure.put(
+        `/menu/${id}`,
+        newMenuItem
+      );
+      console.log(updateMenuItemResponse.data);
+      if (updateMenuItemResponse.data.modifiedCount) {
         Swal.fire({
-          title: "Added Successfully!",
+          title: "Update Successfully!",
           text: `${data.recipe} is added to the menu.`,
           icon: "success",
         });
@@ -46,8 +56,8 @@ const AddItems = () => {
     <div className="p-16">
       <div className="flex justify-center text-center">
         <SectionTitle
-          heading="ADD AN ITEM"
-          subHeading="What's new?"
+          heading={"UPDATE ITEM"}
+          subHeading={"Update your menu"}
         ></SectionTitle>
       </div>
       <div className="bg-[#F3F3F3] p-10">
@@ -62,6 +72,7 @@ const AddItems = () => {
             <input
               type="text"
               id="recipe"
+              defaultValue={filteredItemData?.name}
               placeholder="Recipe name"
               {...register("recipe", { required: "Recipe name is required" })}
               className="w-full p-2 border"
@@ -87,7 +98,8 @@ const AddItems = () => {
                 {...register("category", {
                   required: "Category name is required",
                 })}
-                defaultValue=""
+                // defaultValue=""
+                defaultValue={filteredItemData?.category}
               >
                 <option value="" disabled>
                   Select Your Category
@@ -114,6 +126,7 @@ const AddItems = () => {
               <input
                 type="number"
                 id="price"
+                defaultValue={filteredItemData?.price}
                 placeholder="Price"
                 {...register("price", { required: "Price is required" })}
                 className="w-full p-2 border"
@@ -135,6 +148,7 @@ const AddItems = () => {
             <textarea
               name="details"
               id="details"
+              defaultValue={filteredItemData?.recipe}
               rows={10}
               className="border w-full"
               {...register("details", {
@@ -181,4 +195,4 @@ const AddItems = () => {
   );
 };
 
-export default AddItems;
+export default UpdateMenuItem;

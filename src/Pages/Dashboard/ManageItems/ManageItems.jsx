@@ -3,12 +3,13 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useMenuData from "../../../Hooks/useMenuData";
 import Swal from "sweetalert2";
 import useAxios from "../../../Hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
-  const [menuData,,refetch] = useMenuData();
+  const [menuData, , refetch] = useMenuData();
   const axiosSecure = useAxios();
 
-  const handleMenuItemDelete = (id,itemName) => {
+  const handleMenuItemDelete = (id, itemName) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -27,7 +28,7 @@ const ManageItems = () => {
               text: `${itemName} has been deleted.`,
               icon: "success",
             });
-              refetch();
+            refetch();
           }
         } catch (error) {
           Swal.fire({
@@ -75,16 +76,17 @@ const ManageItems = () => {
                     <td>{data.name}</td>
                     <td>${data.price}</td>
                     <td>
-                      <button
-                        //   onClick={() => handleCartItemDelete(itemData._id)}
-                        className="btn bg-[#D1A054] btn-xs"
-                      >
-                        <MdEdit className="text-xl text-white"></MdEdit>
-                      </button>
+                      <Link to={`/dashboard/updateItem/${data._id}`}>
+                        <button className="btn bg-[#D1A054] btn-xs">
+                          <MdEdit className="text-xl text-white"></MdEdit>
+                        </button>
+                      </Link>
                     </td>
                     <td>
                       <button
-                        onClick={() => handleMenuItemDelete(data._id,data.name)}
+                        onClick={() =>
+                          handleMenuItemDelete(data._id, data.name)
+                        }
                         className="btn bg-red-600 btn-xs"
                       >
                         <MdDelete className="text-xl text-white"></MdDelete>
