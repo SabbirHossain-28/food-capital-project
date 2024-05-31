@@ -1,5 +1,9 @@
+import { loadStripe } from "@stripe/stripe-js";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_KEY);
 const Payment = () => {
     return (
         <div className="p-16">
@@ -7,7 +11,9 @@ const Payment = () => {
                 <SectionTitle heading={"PAYMENT"} subHeading={"Pay here for purchase"}></SectionTitle>
             </div>
             <div>
-                <h2>This payment gateway route</h2>
+                <Elements stripe={stripePromise}>
+                    <CheckoutForm></CheckoutForm>
+                </Elements>
             </div>
         </div>
     );
