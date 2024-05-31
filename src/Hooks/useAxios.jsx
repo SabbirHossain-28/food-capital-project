@@ -24,7 +24,7 @@ const useAxios = () => {
         return response;
     },async function(error){
         const status=error.response.status;
-        console.log("status error in the interceptor",error);
+        // console.log("status error in the interceptor",error)
         if(status===401 || status===403){
             await logOut()
             navigate("/login")

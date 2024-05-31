@@ -9,9 +9,10 @@ import { MdBookOnline, MdOutlineRateReview } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import { FaHome, FaUsers, FaUtensils } from "react-icons/fa";
 import { FaBook, FaList} from "react-icons/fa6";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <div className="flex">
       <div className="w-72 min-h-screen bg-[#D1A054]">
