@@ -29,8 +29,8 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="text-lg font-medium" to="/dashboard/adminItems">
-                  <FaUtensils className="text-xl"></FaUtensils>Admin Items
+                <NavLink className="text-lg font-medium" to="/dashboard/addItems">
+                  <FaUtensils className="text-xl"></FaUtensils>Add Items
                 </NavLink>
               </li>
               <li>
