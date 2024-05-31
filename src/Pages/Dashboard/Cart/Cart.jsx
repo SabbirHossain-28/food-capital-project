@@ -3,6 +3,7 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useCart from "../../../Hooks/useCart";
 import { MdDelete } from "react-icons/md";
 import useAxios from "../../../Hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -65,7 +66,15 @@ const Cart = () => {
             </h2>
           </div>
           <div>
-            <button className="btn bg-[#D1A054] text-white">PAY</button>
+            {cart.length ? (
+              <Link to="/dashboard/payment">
+                <button className="btn bg-[#D1A054] text-white">PAY</button>
+              </Link>
+            ) : (
+              <button disabled className="btn bg-[#D1A054] text-white">
+                PAY
+              </button>
+            )}
           </div>
         </div>
       </div>
