@@ -3,10 +3,12 @@ import { RxAvatar } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const [cart]=useCart();
+  const [isAdmin] = useAdmin();
+  const [cart] = useCart();
   const navigate = useNavigate();
   console.log(user);
   const handleLogout = () => {
@@ -22,9 +24,17 @@ const Navbar = () => {
       <li className="text-white">
         <a>Contact Us</a>
       </li>
-      <li className="text-white">
-       <Link to="/dashboard">DashBorad</Link>
-      </li>
+      {user && isAdmin && (
+        <li className="text-white">
+          <Link to="/dashboard/adminHome">DashBorad</Link>
+        </li>
+      )}
+      {
+        user && !isAdmin && <li className="text-white">
+        <Link to="/dashboard/userHome">DashBorad</Link>
+       </li>
+      }
+
       <li className="text-white">
         <Link to="/menu">Our Menu</Link>
       </li>
