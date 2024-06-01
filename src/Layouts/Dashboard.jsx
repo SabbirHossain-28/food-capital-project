@@ -105,7 +105,7 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink className="text-lg font-medium" to="/shop">
+            <NavLink className="text-lg font-medium" to="/shop/salad">
               <TiShoppingBag className="text-xl"></TiShoppingBag> Our Shop
             </NavLink>
           </li>
