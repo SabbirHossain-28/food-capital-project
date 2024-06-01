@@ -8,7 +8,7 @@ import {
 import { MdBookOnline, MdOutlineRateReview } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import { FaHome, FaUsers, FaUtensils } from "react-icons/fa";
-import { FaBook, FaList} from "react-icons/fa6";
+import { FaBook, FaList, FaMoneyBills} from "react-icons/fa6";
 import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
@@ -62,6 +62,11 @@ const Dashboard = () => {
               <li>
                 <NavLink className="text-lg font-medium" to="/dashboard/cart">
                   <TiShoppingCart className="text-xl"></TiShoppingCart>My Cart
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="text-lg font-medium" to="/dashboard/paymentHistory">
+                  <FaMoneyBills className="text-xl"></FaMoneyBills>Payment History
                 </NavLink>
               </li>
               <li>
