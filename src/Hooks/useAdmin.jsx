@@ -7,9 +7,10 @@ const useAdmin = () => {
     const axiosSecure=useAxios();
     const {data:isAdmin,isPending:isAdminLoading}=useQuery({
         queryKey:["isAdmin",user?.email],
+        enabled: !!user?.email,
         queryFn:async()=>{
-            const res=await axiosSecure.get(`/users/admin/${user.email}`);
-            // console.log(res.data);
+            const res=await axiosSecure.get(`/users/admin/${user?.email}`);
+            console.log(res.data);
             return res.data?.admin;
         }
     })
